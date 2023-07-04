@@ -1,0 +1,42 @@
+/* PlayerMenu.css */
+
+.general-container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: flex-start;
+    height: 100vh;
+    padding-top: 15px;
+  }
+  
+  .side-menu {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 300px;
+  }
+  
+  .buttons-list-menu {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .game-menu-item {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #e0e0e0;
+    color: #333;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .game-menu-item.selected {
+    background-color: #888;
+    color: #fff;
+  }
+  

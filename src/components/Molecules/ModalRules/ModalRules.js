@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import './ModalRules.css';
-import rulesImage from "../../assets/images/rules.png"
+import rulesImage from "../../../assets/images/rules.png"
 
 const ModalRules = ({ onClose }) => {
   const modalRef = useRef(null);
