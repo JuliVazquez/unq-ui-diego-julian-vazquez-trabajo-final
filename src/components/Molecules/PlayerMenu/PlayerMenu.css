@@ -1,6 +1,4 @@
-/* PlayerMenu.css */
-
-.general-container {
+.general-container_left {
     max-width: 1250px;
     margin: 0 auto;
     padding: 0 1rem;
@@ -9,13 +7,14 @@
     height: 100vh;
     padding-top: 15px;
   }
-  
-  .side-menu {
+
+  .side-menu-left {
     position: fixed;
     top: 50px;
     left: 0;
     width: 300px;
   }
+  
   
   .buttons-list-menu {
     display: flex;
@@ -41,7 +40,17 @@
   }
   
   .option-image {
-    max-width: 300px; /* Establece un ancho máximo para evitar que la imagen se haga demasiado grande */
-    max-height: 500px; /* Establece una altura máxima para evitar que la imagen se haga demasiado grande */
+    max-width: 300px; 
+    max-height: 500px; 
+  }
+  
+  .side-menu-right {
+    position: fixed;
+    top: 50px;
+    right: 0;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
