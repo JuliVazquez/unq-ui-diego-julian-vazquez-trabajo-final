@@ -40,3 +40,8 @@
     color: #fff;
   }
   
+  .option-image {
+    max-width: 300px; /* Establece un ancho máximo para evitar que la imagen se haga demasiado grande */
+    max-height: 500px; /* Establece una altura máxima para evitar que la imagen se haga demasiado grande */
+  }
+  

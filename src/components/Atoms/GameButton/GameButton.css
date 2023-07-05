@@ -1,12 +1,4 @@
-.playground-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .playground-button {
+.playground-button {
     position: fixed;
     bottom: 20px;
     left: 20px;
@@ -26,6 +18,4 @@
   .playground-button button:hover {
     background-color: #cc0000;
   }
-  
-  
   
