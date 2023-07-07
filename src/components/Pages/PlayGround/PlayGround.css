@@ -16,6 +16,13 @@
     padding-top: 15px;
   }
 
+  .center-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .side-menu-left {
     position: fixed;
     top: 50px;

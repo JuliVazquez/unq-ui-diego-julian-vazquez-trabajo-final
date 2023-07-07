@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GameButton from "../../Atoms/GameButton/GameButton";
+import Scoreboard from "../../Atoms/Scoreboard/Scoreboard"
 import piedraImg from "../../../assets/images/piedra.jpg";
 import papelImg from "../../../assets/images/papel.jpg";
 import tijeraImg from "../../../assets/images/tijera.jpg";
@@ -12,6 +13,8 @@ import "./Playground.css"
 const Playground = () => {
   const [selectedPlayerOption, setSelectedPlayerOption] = useState(backing);
   const [selectedIAOption, setSelectedIAOption] = useState(null);
+  const [playerWins, setPlayerWins] = useState(0);
+  const [iaWins, setIaWins] = useState(0);
 
   useEffect(() => {
     setSelectedIAOption(backing);
@@ -29,6 +32,14 @@ const Playground = () => {
       const iaSelection = iaOptions[randomIndex];
       setSelectedIAOption(iaSelection);
 
+      // Verificar el resultado del juego y actualizar los marcadores
+      const result = getResult(selectedPlayerOption, iaSelection);
+      if (result === "player") {
+        setPlayerWins((prevWins) => prevWins + 1);
+      } else if (result === "ia") {
+        setIaWins((prevWins) => prevWins + 1);
+      }
+
       // Reiniciar los estados después de 5 segundos
       setTimeout(() => {
         setSelectedPlayerOption(backing);
@@ -36,6 +47,23 @@ const Playground = () => {
       }, 5000);
     } else {
       alert("Debes seleccionar una opción antes de jugar");
+    }
+  };
+
+  const getResult = (playerOption, iaOption) => {
+    // Implementa tu lógica para determinar el resultado del juego (ejemplo)
+    if (
+      (playerOption === "Piedra" && (iaOption === "Tijera" || iaOption === "Lagarto")) ||
+      (playerOption === "Papel" && (iaOption === "Piedra" || iaOption === "Spock")) ||
+      (playerOption === "Tijera" && (iaOption === "Papel" || iaOption === "Lagarto")) ||
+      (playerOption === "Lagarto" && (iaOption === "Papel" || iaOption === "Spock")) ||
+      (playerOption === "Spock" && (iaOption === "Piedra" || iaOption === "Tijera"))
+    ) {
+      return "player";
+    } else if (playerOption === iaOption) {
+      return "draw";
+    } else {
+      return "ia";
     }
   };
 
@@ -60,8 +88,12 @@ const Playground = () => {
   const iaOptionImage = selectedIAOption ? getImageForOption(selectedIAOption) : backing;
 
   return (
+    <div classname=".playground-container">
+      
     <div className="general-container_left">
+      
       <div className="side-menu-left">
+        
         <div className="buttons-list-menu">
           <button
             className={`game-menu-item ${selectedPlayerOption === "Piedra" && "selected"}`}
@@ -106,6 +138,10 @@ const Playground = () => {
         )}
       </div>
 
+        <div className="center-container">
+          <Scoreboard playerWins={playerWins} iaWins={iaWins} />
+        </div>
+      
       <div className="side-menu-right">
         <div className="playground-button">
           <GameButton onClick={handleJugar}>Jugar</GameButton>
@@ -117,6 +153,7 @@ const Playground = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
