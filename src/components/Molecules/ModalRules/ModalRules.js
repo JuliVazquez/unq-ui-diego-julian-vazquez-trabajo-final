@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import './ModalRules.css';
+import CustomButton from '../../Atoms/CustomButton/CutomButton'
 import rulesImage from "../../../assets/images/rules.png"
 
 const ModalRules = ({ onClose }) => {
@@ -30,7 +31,8 @@ const ModalRules = ({ onClose }) => {
       <div className="modal-content">
         <button className="modal-close" onClick={onClose}>X</button>
         <h2>Cómo jugar?</h2>
-        <p>Piedra, Papel, Tijeras, Lagarto, Spock es una expansíon del clásico Piedra, Papel o Tijeras. Creado por Sam Kass, y popularizado por Sheldon Cooper.</p>
+        <p>Piedra, Papel, Tijeras, Lagarto, Spock es una expansíon del clásico Piedra, Papel o Tijeras. Creado por Sam Kass, y popularizado por Sheldon Cooper en la serie The Big Bang Theory.</p>
+        <p>El sistema es el siguiente:</p>
         <img src={rulesImage} alt="Reglas del juego" />
         <p>Tijera corta a Papel</p>
         <p>Papel tapa a Piedra</p>

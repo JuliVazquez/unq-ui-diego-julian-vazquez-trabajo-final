@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Launcher.css';
 import ModalRules from '../../Molecules/ModalRules/ModalRules';
-import backgroundImage from '../../../assets/images/background3.jpg';
+import backgroundImage from '../../../assets/images/background.jpg';
 import CustomButton from '../../Atoms/CustomButton/CutomButton';
 
 const Launcher = () => {
@@ -27,10 +27,10 @@ const Launcher = () => {
         <p>PIEDRA, PAPEL, TIJERAS, LAGARTO, SPOCK</p>
       </div>
       <CustomButton onClick={handleNewGame} backgroundColor="white" size="large" textColor="black">
-        Nuevo juego
+        NUEVO JUEGO
       </CustomButton>
       <CustomButton onClick={handleOpenModal} backgroundColor="white" size="small" textColor="black">
-        Reglas
+        REGLAS
       </CustomButton>
       {isModalOpen && <ModalRules onClose={handleCloseModal} />}
     </div>
