@@ -12,7 +12,7 @@ const App = () => {
         <Route path="/playground" element={<Playground/>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter> 
   );
 }
 

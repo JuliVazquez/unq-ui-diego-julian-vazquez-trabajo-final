@@ -11,6 +11,7 @@ import backing from "../../../assets/images/backing-card.jpg";
 import "./Playground.css"
 
 const Playground = () => {
+  const navigate = useNavigate();
   const [selectedPlayerOption, setSelectedPlayerOption] = useState(backing);
   const [selectedIAOption, setSelectedIAOption] = useState(null);
   const [playerWins, setPlayerWins] = useState(0);
@@ -44,7 +45,7 @@ const Playground = () => {
       setTimeout(() => {
         setSelectedPlayerOption(backing);
         setSelectedIAOption(backing);
-      }, 5000);
+      }, 2000);
     } else {
       alert("Debes seleccionar una opción antes de jugar");
     }
@@ -84,6 +85,17 @@ const Playground = () => {
     }
   };
 
+  const terminarPartida = () => {
+    // Realizar el recuento y determinar el ganador
+    const ganador = playerWins > iaWins ? "Jugador" : "IA";
+    
+    // Mostrar mensaje de alerta con el ganador
+    alert(`El ganador es: ${ganador}`);
+    
+    // Navegar hacia el launcher
+    navigate('/');
+  };
+  
   const playerOptionImage = getImageForOption(selectedPlayerOption);
   const iaOptionImage = selectedIAOption ? getImageForOption(selectedIAOption) : backing;
 
@@ -91,10 +103,14 @@ const Playground = () => {
     <div classname=".playground-container">
       
     <div className="general-container_left">
-      
+      <div className="playground-button-terminar">
+        <GameButton onClick={terminarPartida}>Terminar Partida</GameButton>
+      </div>
+
       <div className="side-menu-left">
         
         <div className="buttons-list-menu">
+          
           <button
             className={`game-menu-item ${selectedPlayerOption === "Piedra" && "selected"}`}
             onClick={() => handleOptionClick("Piedra")}
@@ -143,9 +159,6 @@ const Playground = () => {
         </div>
       
       <div className="side-menu-right">
-        <div className="playground-button">
-          <GameButton onClick={handleJugar}>Jugar</GameButton>
-        </div>
 
         {selectedIAOption && (
           <div className="option-image-container">

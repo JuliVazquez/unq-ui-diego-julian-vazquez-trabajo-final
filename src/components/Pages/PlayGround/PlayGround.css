@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .playground-container {
     height: 100vh;
     display: flex;
@@ -89,6 +93,11 @@
     background-color: #cc0000;
   }
   
-  
+
+  .playground-button-terminar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
   
   

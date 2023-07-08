@@ -1,19 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+*{margin: 0;
+  font-family: 'VT323', monospace;
+}
+
 .launcher-container {
-    background-color: lightblue;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .button {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: white;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+  padding-bottom: 30px;
+  color:aliceblue
+}
+
+.launcher-content {
+  margin-top: auto;
+  margin-bottom: 40px;
+  font-size: 50px; /* Ajusta el tamaño de la fuente según tus preferencias */
+}
+
+
+
+
