@@ -1,10 +1,10 @@
 import React from "react";
-import "./MoveOptionButton.css"; // Importa el archivo CSS
+import './MoveOptionButton.css'
 
 const MoveOptionButton = ({ option, selectedOption, onClick }) => {
   return (
     <button
-      className={`game-menu-item ${selectedOption === option && "selected"}`}
+      className={`game-menu-item ${selectedOption === option ? "selected" : ""}`}
       onClick={() => onClick(option)}
     >
       {option}

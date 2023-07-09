@@ -3,7 +3,8 @@
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 300px; 
+  max-width: 250px;
+  width: 100%;
 }
 
 .scoreboard {
