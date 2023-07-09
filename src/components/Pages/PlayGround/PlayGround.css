@@ -18,10 +18,9 @@ background-color: black;
   margin: 0 auto;
   padding: 0 1rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
-  padding-top: 15px;
-  
 }
 
 .side-menu-left {
@@ -60,12 +59,13 @@ background-color: black;
 
 
 .center-container {
-flex-grow: 1;
-display: flex;
-justify-content: center;
-align-items: flex-start;
-flex-direction: column;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
+
 
 .playground-button-terminar {
 position: absolute;
@@ -83,4 +83,11 @@ color: aliceblue;
 text-align: center;
 width: 100%;
 padding: 20px;
+}
+
+.round-winner {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
 }

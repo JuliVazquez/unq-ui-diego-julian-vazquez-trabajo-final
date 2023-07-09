@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from '../../Atoms/CustomButton/CutomButton'
 import MoveOptionButton from '../../Atoms/MoveOptionButton/MoveOptionButton'
 
-import GameButton from "../../Atoms/GameButton/GameButton";
 import Scoreboard from "../../Atoms/Scoreboard/Scoreboard"
 
 
@@ -18,6 +17,7 @@ const Playground = () => {
   const [selectedIAOption, setSelectedIAOption] = useState(null);
   const [playerWins, setPlayerWins] = useState(0);
   const [iaWins, setIaWins] = useState(0);
+  const [roundWinner, setRoundWinner] = useState(null); // Nuevo estado para el ganador de cada mano
 
   useEffect(() => {
     setSelectedIAOption(images.backing);
@@ -39,14 +39,19 @@ const Playground = () => {
       const result = getResult(selectedPlayerOption, iaSelection);
       if (result === "player") {
         setPlayerWins((prevWins) => prevWins + 1);
+        setRoundWinner("Jugador"); // Establecer al jugador como ganador de la mano
       } else if (result === "ia") {
         setIaWins((prevWins) => prevWins + 1);
+        setRoundWinner("IA"); // Establecer a la IA como ganadora de la mano
+      } else {
+        setRoundWinner("Empate"); // Establecer empate como resultado de la mano
       }
 
-      // Reiniciar los estados después de 5 segundos
+      // Reiniciar los estados después de 2 segundos
       setTimeout(() => {
         setSelectedPlayerOption(images.backing);
         setSelectedIAOption(images.backing);
+        setRoundWinner(null); // Reiniciar el estado del ganador de la mano
       }, 2000);
     } else {
       alert("Debes seleccionar una opción antes de jugar");
@@ -102,15 +107,8 @@ const Playground = () => {
   const iaOptionImage = selectedIAOption ? getImageForOption(selectedIAOption) : images.backing;
 
   return (
-
-      
     <div className="general-container_left">
-
-
-
-
       <div className="side-menu-left">
-
         <div className="buttons-list-menu">
           <MoveOptionButton
             option="Piedra"
@@ -140,14 +138,10 @@ const Playground = () => {
         </div>
 
         <div className="playground-button">
-          {/* <GameButton onClick={handleJugar}>Jugar</GameButton> */}
           <CustomButton onClick={handleJugar} backgroundColor="white" size="large" textColor="black">
-          JUGAR!
+            JUGAR!
           </CustomButton>
         </div>
-
-      
-
 
         {selectedPlayerOption && (
           <div className="option-image-container">
@@ -159,6 +153,11 @@ const Playground = () => {
       <div className="center-container">
         <div className="content-container">
           <Scoreboard playerWins={playerWins} iaWins={iaWins} />
+          {roundWinner && (
+            <div className="round-winner">
+              {roundWinner} ganó esta mano
+            </div>
+          )}
         </div>
 
         <div className="playground-button-terminar">
@@ -168,9 +167,7 @@ const Playground = () => {
         </div>
       </div>
 
-      
       <div className="side-menu-right">
-
         {selectedIAOption && (
           <div className="option-image-container">
             <img src={iaOptionImage} alt={selectedIAOption} className="option-image" />
