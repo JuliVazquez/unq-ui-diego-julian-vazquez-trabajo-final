@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import CustomButton from '../../Atoms/CustomButton/CutomButton'
-import MoveOptionButton from '../../Atoms/MoveOptionButton/MoveOptionButton'
+import CustomButton from "../../Atoms/CustomButton/CutomButton";
+import MoveOptionButton from "../../Atoms/MoveOptionButton/MoveOptionButton";
 
-import Scoreboard from "../../Atoms/Scoreboard/Scoreboard"
-
+import Scoreboard from "../../Atoms/Scoreboard/Scoreboard";
 
 import images from "../../../assets/images/images";
 
-import "./Playground.css"
+import "./Playground.css";
 
 const Playground = () => {
   const navigate = useNavigate();
@@ -17,49 +16,56 @@ const Playground = () => {
   const [selectedIAOption, setSelectedIAOption] = useState(null);
   const [playerWins, setPlayerWins] = useState(0);
   const [iaWins, setIaWins] = useState(0);
-  const [roundWinner, setRoundWinner] = useState(null); // Nuevo estado para el ganador de cada mano
+  const [roundWinner, setRoundWinner] = useState(null);
+  const [showWinner, setShowWinner] = useState(false);
+  const [disableInteraction, setDisableInteraction] = useState(false);
+  const [showTerminarButton, setShowTerminarButton] = useState(true);
 
   useEffect(() => {
     setSelectedIAOption(images.backing);
   }, []);
 
   const handleOptionClick = (option) => {
-    setSelectedPlayerOption(option);
+    if (!disableInteraction) {
+      setSelectedPlayerOption(option);
+    }
   };
 
   const handleJugar = () => {
-    if (selectedPlayerOption !== images.backing) {
-      console.log("Botón 'Jugar' presionado");
-      const iaOptions = ["Piedra", "Papel", "Tijera", "Lagarto", "Spock"];
-      const randomIndex = Math.floor(Math.random() * iaOptions.length);
-      const iaSelection = iaOptions[randomIndex];
-      setSelectedIAOption(iaSelection);
+    if(!disableInteraction){ 
+      if (selectedPlayerOption !== images.backing) {
+        console.log("Botón 'Jugar' presionado");
+        setShowTerminarButton(false);
+        const iaOptions = ["Piedra", "Papel", "Tijera", "Lagarto", "Spock"];
+        const randomIndex = Math.floor(Math.random() * iaOptions.length);
+        const iaSelection = iaOptions[randomIndex];
+        setSelectedIAOption(iaSelection);
 
-      // Verificar el resultado del juego y actualizar los marcadores
-      const result = getResult(selectedPlayerOption, iaSelection);
-      if (result === "player") {
-        setPlayerWins((prevWins) => prevWins + 1);
-        setRoundWinner("Jugador"); // Establecer al jugador como ganador de la mano
-      } else if (result === "ia") {
-        setIaWins((prevWins) => prevWins + 1);
-        setRoundWinner("IA"); // Establecer a la IA como ganadora de la mano
+        const result = getResult(selectedPlayerOption, iaSelection);
+        if (result === "player") {
+          setPlayerWins((prevWins) => prevWins + 1);
+          setRoundWinner("Jugador");
+        } else if (result === "ia") {
+          setIaWins((prevWins) => prevWins + 1);
+          setRoundWinner("IA");
+        } else {
+          setRoundWinner("Empate");
+        }
+
+        setTimeout(() => {
+          setSelectedPlayerOption(images.backing);
+          setSelectedIAOption(images.backing);
+          setRoundWinner(null);
+          setShowWinner(false);
+          setShowTerminarButton(true);
+        }, 2000);
       } else {
-        setRoundWinner("Empate"); // Establecer empate como resultado de la mano
+        alert("Debes seleccionar una opción antes de jugar");
       }
-
-      // Reiniciar los estados después de 2 segundos
-      setTimeout(() => {
-        setSelectedPlayerOption(images.backing);
-        setSelectedIAOption(images.backing);
-        setRoundWinner(null); // Reiniciar el estado del ganador de la mano
-      }, 2000);
-    } else {
-      alert("Debes seleccionar una opción antes de jugar");
     }
   };
 
   const getResult = (playerOption, iaOption) => {
-    // Implementa tu lógica para determinar el resultado del juego (ejemplo)
     if (
       (playerOption === "Piedra" && (iaOption === "Tijera" || iaOption === "Lagarto")) ||
       (playerOption === "Papel" && (iaOption === "Piedra" || iaOption === "Spock")) ||
@@ -69,11 +75,12 @@ const Playground = () => {
     ) {
       return "player";
     } else if (playerOption === iaOption) {
-      return "draw";
+      return "empate";
     } else {
       return "ia";
     }
   };
+  
 
   const getImageForOption = (option) => {
     switch (option) {
@@ -93,52 +100,63 @@ const Playground = () => {
   };
 
   const terminarPartida = () => {
-    // Realizar el recuento y determinar el ganador
     const ganador = playerWins > iaWins ? "Jugador" : "IA";
-    
-    // Mostrar mensaje de alerta con el ganador
-    alert(`El ganador es: ${ganador}`);
-    
-    // Navegar hacia el launcher
-    navigate('/');
+    setShowWinner(true);
+
+    setDisableInteraction(true);
+
+    setTimeout(() => {
+      navigate("/");
+    }, 5000);
   };
-  
+
   const playerOptionImage = getImageForOption(selectedPlayerOption);
   const iaOptionImage = selectedIAOption ? getImageForOption(selectedIAOption) : images.backing;
 
   return (
-    <div className="general-container_left">
+    <div className={`general-container_left ${disableInteraction ? "disable-interaction" : ""}`}>
       <div className="side-menu-left">
         <div className="buttons-list-menu">
           <MoveOptionButton
             option="Piedra"
             selectedOption={selectedPlayerOption}
             onClick={handleOptionClick}
+            disabled={disableInteraction}
           />
           <MoveOptionButton
             option="Papel"
             selectedOption={selectedPlayerOption}
             onClick={handleOptionClick}
+            disabled={disableInteraction}
           />
           <MoveOptionButton
             option="Tijera"
             selectedOption={selectedPlayerOption}
             onClick={handleOptionClick}
+            disabled={disableInteraction}
           />
           <MoveOptionButton
             option="Lagarto"
             selectedOption={selectedPlayerOption}
             onClick={handleOptionClick}
+            disabled={disableInteraction}
           />
           <MoveOptionButton
             option="Spock"
             selectedOption={selectedPlayerOption}
             onClick={handleOptionClick}
+            disabled={disableInteraction}
           />
         </div>
 
         <div className="playground-button">
-          <CustomButton onClick={handleJugar} backgroundColor="white" size="large" textColor="black">
+          <CustomButton
+            onClick={handleJugar}
+            backgroundColor="white"
+            size="large"
+            textColor="black"
+            disabled={disableInteraction}
+          >
             JUGAR!
           </CustomButton>
         </div>
@@ -153,19 +171,30 @@ const Playground = () => {
       <div className="center-container">
         <div className="content-container">
           <Scoreboard playerWins={playerWins} iaWins={iaWins} />
+
           {roundWinner && (
-            <div className="round-winner">
-              {roundWinner} ganó esta mano
+            <div className={`round-winner ${roundWinner === "Empate" ? "white-text" : ""}`}>
+              {roundWinner === "Empate" ? "Empate" : <span className="orange-text">{roundWinner}</span>}
+              {roundWinner !== "Empate" && " ha ganado esta mano"}
             </div>
           )}
+      
         </div>
 
         <div className="playground-button-terminar">
-          <CustomButton onClick={terminarPartida} backgroundColor="white" size="small" textColor="black">
-            ABANDONAR
+        {showTerminarButton && ( // Agrega la condición para renderizar el botón "Terminar"
+          <CustomButton
+            onClick={terminarPartida}
+            backgroundColor="white"
+            size="small"
+            textColor="black"
+            disabled={disableInteraction}
+          >
+            Terminar
           </CustomButton>
-        </div>
+        )}
       </div>
+    </div>
 
       <div className="side-menu-right">
         {selectedIAOption && (
@@ -174,6 +203,14 @@ const Playground = () => {
           </div>
         )}
       </div>
+
+      {showWinner && (
+        <div className="winner-message">
+          <div className="winner-message-content">
+            El ganador es: <span className="orange-text">{playerWins > iaWins ? "Jugador" : "IA"}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
