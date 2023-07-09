@@ -1,18 +1,18 @@
 import React from "react";
+import "./Scoreboard.css"
 
 const Scoreboard = ({ playerWins, iaWins }) => {
   return (
     <div className="scoreboard-container">
       <div className="scoreboard">
-        <h2>Marcador</h2>
         <div className="score">
-          <div>
-            <span>Jugador:</span>
-            <span>{playerWins}</span>
+          <div className="score-row">
+            <div className="score-label">Jugador:</div>
+            <div className="score-value">{playerWins}</div>
           </div>
-          <div>
-            <span>IA:</span>
-            <span>{iaWins}</span>
+          <div className="score-row">
+            <div className="score-label">IA:</div>
+            <div className="score-value">{iaWins}</div>
           </div>
         </div>
       </div>
@@ -21,3 +21,4 @@ const Scoreboard = ({ playerWins, iaWins }) => {
 };
 
 export default Scoreboard;
+

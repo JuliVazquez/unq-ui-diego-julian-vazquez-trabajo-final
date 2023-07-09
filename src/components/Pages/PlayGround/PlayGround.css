@@ -1,14 +1,17 @@
 body {
   overflow: hidden;
+  background-color: black;
 }
 
-.playground-container {
+/* .playground-container {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
+    
+    
+  } */
 
   .general-container_left {
     max-width: 1250px;
@@ -18,13 +21,7 @@ body {
     align-items: flex-start;
     height: 100vh;
     padding-top: 15px;
-  }
-
-  .center-container {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
   }
 
   .side-menu-left {
@@ -33,7 +30,6 @@ body {
     left: 0;
     width: 300px;
   }
-  
   
   .buttons-list-menu {
     display: flex;
@@ -65,7 +61,7 @@ body {
   
   .side-menu-right {
     position: fixed;
-    top: 50px;
+    top: 340px;
     right: 0;
     width: 300px;
     display: flex;
@@ -79,7 +75,7 @@ body {
     left: 20px;
   }
   
-  .playground-button button {
+  /* .playground-button button {
     padding: 10px 20px;
     background-color: #ff0000;
     color: #fff;
@@ -87,17 +83,34 @@ body {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-  }
+  } */
   
-  .playground-button button:hover {
+  /* .playground-button button:hover {
     background-color: #cc0000;
-  }
+  } */
   
+.center-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
 
-  .playground-button-terminar {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-  }
-  
-  
+.playground-button-terminar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scoreboard-container {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: aliceblue;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+}

@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import CustomButton from '../../Atoms/CustomButton/CutomButton'
+import MoveOptionButton from '../../Atoms/MoveOptionButton/MoveOptionButton'
+
 import GameButton from "../../Atoms/GameButton/GameButton";
 import Scoreboard from "../../Atoms/Scoreboard/Scoreboard"
-import piedraImg from "../../../assets/images/piedra.jpg";
-import papelImg from "../../../assets/images/papel.jpg";
-import tijeraImg from "../../../assets/images/tijera.jpg";
-import lagartoImg from "../../../assets/images/lagarto.jpg";
-import spockImg from "../../../assets/images/spock.jpg";
-import backing from "../../../assets/images/backing-card.jpg";
+
+
+import images from "../../../assets/images/images";
+
 import "./Playground.css"
 
 const Playground = () => {
   const navigate = useNavigate();
-  const [selectedPlayerOption, setSelectedPlayerOption] = useState(backing);
+  const [selectedPlayerOption, setSelectedPlayerOption] = useState(images.backing);
   const [selectedIAOption, setSelectedIAOption] = useState(null);
   const [playerWins, setPlayerWins] = useState(0);
   const [iaWins, setIaWins] = useState(0);
 
   useEffect(() => {
-    setSelectedIAOption(backing);
+    setSelectedIAOption(images.backing);
   }, []);
 
   const handleOptionClick = (option) => {
@@ -26,7 +28,7 @@ const Playground = () => {
   };
 
   const handleJugar = () => {
-    if (selectedPlayerOption !== backing) {
+    if (selectedPlayerOption !== images.backing) {
       console.log("Botón 'Jugar' presionado");
       const iaOptions = ["Piedra", "Papel", "Tijera", "Lagarto", "Spock"];
       const randomIndex = Math.floor(Math.random() * iaOptions.length);
@@ -43,8 +45,8 @@ const Playground = () => {
 
       // Reiniciar los estados después de 5 segundos
       setTimeout(() => {
-        setSelectedPlayerOption(backing);
-        setSelectedIAOption(backing);
+        setSelectedPlayerOption(images.backing);
+        setSelectedIAOption(images.backing);
       }, 2000);
     } else {
       alert("Debes seleccionar una opción antes de jugar");
@@ -71,17 +73,17 @@ const Playground = () => {
   const getImageForOption = (option) => {
     switch (option) {
       case "Piedra":
-        return piedraImg;
+        return images.piedraImg;
       case "Papel":
-        return papelImg;
+        return images.papelImg;
       case "Tijera":
-        return tijeraImg;
+        return images.tijeraImg;
       case "Lagarto":
-        return lagartoImg;
+        return images.lagartoImg;
       case "Spock":
-        return spockImg;
+        return images.spockImg;
       default:
-        return backing;
+        return images.backing;
     }
   };
 
@@ -97,55 +99,55 @@ const Playground = () => {
   };
   
   const playerOptionImage = getImageForOption(selectedPlayerOption);
-  const iaOptionImage = selectedIAOption ? getImageForOption(selectedIAOption) : backing;
+  const iaOptionImage = selectedIAOption ? getImageForOption(selectedIAOption) : images.backing;
 
   return (
-    <div classname=".playground-container">
+
       
     <div className="general-container_left">
-      <div className="playground-button-terminar">
-        <GameButton onClick={terminarPartida}>Terminar Partida</GameButton>
-      </div>
+
+
+
 
       <div className="side-menu-left">
-        
+
         <div className="buttons-list-menu">
-          
-          <button
-            className={`game-menu-item ${selectedPlayerOption === "Piedra" && "selected"}`}
-            onClick={() => handleOptionClick("Piedra")}
-          >
-            Piedra
-          </button>
-          <button
-            className={`game-menu-item ${selectedPlayerOption === "Papel" && "selected"}`}
-            onClick={() => handleOptionClick("Papel")}
-          >
-            Papel
-          </button>
-          <button
-            className={`game-menu-item ${selectedPlayerOption === "Tijera" && "selected"}`}
-            onClick={() => handleOptionClick("Tijera")}
-          >
-            Tijera
-          </button>
-          <button
-            className={`game-menu-item ${selectedPlayerOption === "Lagarto" && "selected"}`}
-            onClick={() => handleOptionClick("Lagarto")}
-          >
-            Lagarto
-          </button>
-          <button
-            className={`game-menu-item ${selectedPlayerOption === "Spock" &&"selected"}`}
-            onClick={() => handleOptionClick("Spock")}
-          >
-            Spock
-          </button>
+          <MoveOptionButton
+            option="Piedra"
+            selectedOption={selectedPlayerOption}
+            onClick={handleOptionClick}
+          />
+          <MoveOptionButton
+            option="Papel"
+            selectedOption={selectedPlayerOption}
+            onClick={handleOptionClick}
+          />
+          <MoveOptionButton
+            option="Tijera"
+            selectedOption={selectedPlayerOption}
+            onClick={handleOptionClick}
+          />
+          <MoveOptionButton
+            option="Lagarto"
+            selectedOption={selectedPlayerOption}
+            onClick={handleOptionClick}
+          />
+          <MoveOptionButton
+            option="Spock"
+            selectedOption={selectedPlayerOption}
+            onClick={handleOptionClick}
+          />
         </div>
 
         <div className="playground-button">
-          <GameButton onClick={handleJugar}>Jugar</GameButton>
+          {/* <GameButton onClick={handleJugar}>Jugar</GameButton> */}
+          <CustomButton onClick={handleJugar} backgroundColor="white" size="large" textColor="black">
+          JUGAR!
+          </CustomButton>
         </div>
+
+      
+
 
         {selectedPlayerOption && (
           <div className="option-image-container">
@@ -154,9 +156,18 @@ const Playground = () => {
         )}
       </div>
 
-        <div className="center-container">
+      <div className="center-container">
+        <div className="content-container">
           <Scoreboard playerWins={playerWins} iaWins={iaWins} />
         </div>
+
+        <div className="playground-button-terminar">
+          <CustomButton onClick={terminarPartida} backgroundColor="white" size="small" textColor="black">
+            ABANDONAR
+          </CustomButton>
+        </div>
+      </div>
+
       
       <div className="side-menu-right">
 
@@ -166,7 +177,6 @@ const Playground = () => {
           </div>
         )}
       </div>
-    </div>
     </div>
   );
 };
