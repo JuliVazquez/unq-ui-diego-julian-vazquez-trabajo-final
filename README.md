@@ -1,11 +1,8 @@
 
 # PPTLG-GAME
-PPTLG-GAME, es una aplicacion web que recrea el juego de Piedra, Papel, Tijeras, Lagarto, Spock; que se hizo popular tras su aparicion en la serie de The Big Bang Theory, aunque en
-verdad fue creado por Sam Kass, que nada tiene que ver con la misma.
+PPTLG-GAME, es una aplicacion web que recrea el juego de Piedra, Papel, Tijeras, Lagarto, Spock; creado por Sam Kass, pero que se hizo popular tras su aparicion en la serie de The Big Bang Theory.
 
-
-
-
+El diseño mantiene el espiritu original del juego, que ya de por sí es una expansion del Piedra, Papel, Tijeras original pero agregando dos nuevos elementos: el Lagarto, y el primer oficial Spock de la serie Star Treck. Esta versióm del juego pretende emular un juego de cartas.
 
 ## Ejecucíon de la aplicación
 

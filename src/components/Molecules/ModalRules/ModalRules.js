@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import './ModalRules.css';
-import CustomButton from '../../Atoms/CustomButton/CutomButton'
 import rulesImage from "../../../assets/images/rules.png"
 
 const ModalRules = ({ onClose }) => {
@@ -18,12 +17,8 @@ const ModalRules = ({ onClose }) => {
         onClose();
       }
     };
-
     document.addEventListener('keydown', handleEscapeKey);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-    };
+    return
   }, [onClose]);
 
   return (

@@ -1,9 +1,8 @@
 .scoreboard-container {
   position: absolute;
   top: 20px;
-  left: 50%;
   transform: translateX(-50%);
-  max-width: 250px;
+  max-width: 300px;
   width: 100%;
 }
 
@@ -12,7 +11,7 @@
   padding: 10px;
   border-radius: 10px;
   border: 2px solid #fff; 
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .score {

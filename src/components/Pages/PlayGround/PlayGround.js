@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import CustomButton from "../../Atoms/CustomButton/CutomButton";
 import MoveOptionButton from "../../Atoms/MoveOptionButton/MoveOptionButton";
-
 import Scoreboard from "../../Atoms/Scoreboard/Scoreboard";
-
 import images from "../../../assets/images/images";
-
 import "./Playground.css";
 
 const Playground = () => {
@@ -20,6 +16,7 @@ const Playground = () => {
   const [showWinner, setShowWinner] = useState(false);
   const [disableInteraction, setDisableInteraction] = useState(false);
   const [showTerminarButton, setShowTerminarButton] = useState(true);
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     setSelectedIAOption(images.backing);
@@ -34,13 +31,13 @@ const Playground = () => {
   const handleJugar = () => {
     if(!disableInteraction){ 
       if (selectedPlayerOption !== images.backing) {
-        console.log("Botón 'Jugar' presionado");
+        setShowError(false);
         setShowTerminarButton(false);
         const iaOptions = ["Piedra", "Papel", "Tijera", "Lagarto", "Spock"];
         const randomIndex = Math.floor(Math.random() * iaOptions.length);
         const iaSelection = iaOptions[randomIndex];
         setSelectedIAOption(iaSelection);
-
+        
         const result = getResult(selectedPlayerOption, iaSelection);
         if (result === "player") {
           setPlayerWins((prevWins) => prevWins + 1);
@@ -51,7 +48,6 @@ const Playground = () => {
         } else {
           setRoundWinner("Empate");
         }
-
         setTimeout(() => {
           setSelectedPlayerOption(images.backing);
           setSelectedIAOption(images.backing);
@@ -60,7 +56,10 @@ const Playground = () => {
           setShowTerminarButton(true);
         }, 2000);
       } else {
-        alert("Debes seleccionar una opción antes de jugar");
+        setShowError(true);
+        setTimeout(() => {
+          setShowError(false);
+        }, 2000);
       }
     }
   };
@@ -81,7 +80,6 @@ const Playground = () => {
     }
   };
   
-
   const getImageForOption = (option) => {
     switch (option) {
       case "Piedra":
@@ -100,13 +98,12 @@ const Playground = () => {
   };
 
   const terminarPartida = () => {
+    setShowError(false);
     setShowWinner(true);
-
     setDisableInteraction(true);
-
     setTimeout(() => {
       navigate("/");
-    }, 4000);
+    }, 3000);
   };
 
   const playerOptionImage = getImageForOption(selectedPlayerOption);
@@ -177,11 +174,17 @@ const Playground = () => {
               {roundWinner !== "Empate" && " ha ganado esta mano"}
             </div>
           )}
+
+          {showError && (
+            <div className="error-message">
+              <p>Debes seleccionar una opción antes de jugar</p>
+            </div>
+          )}
       
         </div>
 
         <div className="playground-button-terminar">
-        {showTerminarButton && ( // Agrega la condición para renderizar el botón "Terminar"
+        {showTerminarButton && ( 
           <CustomButton
             onClick={terminarPartida}
             backgroundColor="white"
@@ -196,31 +199,30 @@ const Playground = () => {
     </div>
 
     <div className="side-menu-right">
-  {selectedIAOption && (
-    <div className="option-image-container">
-      <img src={images.evilIA} alt="Nueva Imagen" className="option-image" />
-    </div>
-  )}
+      {selectedIAOption && (
+        <div className="option-image-container">
+          <img src={images.evilIA} alt="Nueva Imagen" className="option-image" />
+        </div>
+      )}
 
-  {selectedIAOption && (
-    <div className="option-image-container">
-      <img src={iaOptionImage} alt={selectedIAOption} className="option-image" />
-    </div>
-  )}
-</div>
-
-
-      {showWinner && (
-        <div className="winner-message">
-          <div className="winner-message-content">
-            El ganador es: <span className="orange-text">{playerWins > iaWins ? "Jugador" : "IA"}</span>
-            <div className="loading-image-container">
-              <img src={images.loading} alt="Loading" className="loading-image" />
-            </div>
-          </div>
+      {selectedIAOption && (
+        <div className="option-image-container">
+          <img src={iaOptionImage} alt={selectedIAOption} className="option-image" />
         </div>
       )}
     </div>
+
+    {showWinner && (
+      <div className="winner-message">
+        <div className="winner-message-content">
+          El ganador es: <span className="orange-text">{playerWins > iaWins ? "Jugador" : "IA"}</span>
+          <div className="loading-image-container">
+            <img src={images.loading} alt="Loading" className="loading-image" />
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
   );
 };
 
