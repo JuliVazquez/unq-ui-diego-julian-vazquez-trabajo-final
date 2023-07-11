@@ -23,7 +23,7 @@ const NotFoundPage = () => {
           size="small"
           textColor="black"
           >
-          VOLVER
+          IR AL INICIO
         </CustomButton>
     </div>
   );

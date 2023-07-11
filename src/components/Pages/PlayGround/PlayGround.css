@@ -32,8 +32,9 @@ background-color: black;
 
 .side-menu-right {
   position: fixed;
-  top: 340px;
+  top: 50%;
   right: 0;
+  transform: translateY(-50%);
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -104,3 +105,16 @@ padding: 20px;
 .white-text {
   color: white;
 }
+
+.loading-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.loading-image {
+  max-width: 25%;
+  height: auto;
+}
+

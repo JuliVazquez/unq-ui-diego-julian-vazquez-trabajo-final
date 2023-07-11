@@ -100,14 +100,13 @@ const Playground = () => {
   };
 
   const terminarPartida = () => {
-    const ganador = playerWins > iaWins ? "Jugador" : "IA";
     setShowWinner(true);
 
     setDisableInteraction(true);
 
     setTimeout(() => {
       navigate("/");
-    }, 5000);
+    }, 4000);
   };
 
   const playerOptionImage = getImageForOption(selectedPlayerOption);
@@ -196,18 +195,28 @@ const Playground = () => {
       </div>
     </div>
 
-      <div className="side-menu-right">
-        {selectedIAOption && (
-          <div className="option-image-container">
-            <img src={iaOptionImage} alt={selectedIAOption} className="option-image" />
-          </div>
-        )}
-      </div>
+    <div className="side-menu-right">
+  {selectedIAOption && (
+    <div className="option-image-container">
+      <img src={images.evilIA} alt="Nueva Imagen" className="option-image" />
+    </div>
+  )}
+
+  {selectedIAOption && (
+    <div className="option-image-container">
+      <img src={iaOptionImage} alt={selectedIAOption} className="option-image" />
+    </div>
+  )}
+</div>
+
 
       {showWinner && (
         <div className="winner-message">
           <div className="winner-message-content">
             El ganador es: <span className="orange-text">{playerWins > iaWins ? "Jugador" : "IA"}</span>
+            <div className="loading-image-container">
+              <img src={images.loading} alt="Loading" className="loading-image" />
+            </div>
           </div>
         </div>
       )}
