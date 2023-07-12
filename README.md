@@ -9,7 +9,8 @@ El diseño mantiene el espiritu original del juego, que ya de por sí es una exp
 
 ## Requisitos previos
 
-El primer paso, pasa asegurarse de tener todas las dependencias que utiliza el proyecto, parado sobre el directorio raiz del mismo, ejecutar en un terminal:
+En primer lugar, se debe contar con Node y NPM instalados.
+Para asegurarse de tener todas las dependencias que utiliza el proyecto, parado sobre el directorio raiz del mismo, ejecutar en un terminal:
 
 ### `npm install`
 
@@ -21,3 +22,4 @@ En el directorio del proyecto, y con un terminal apuntando al mismo, correr el s
 
 ### `npm start`
 
+Una vez ejecutado, se abre en el navegador en `localhost:3000`.
