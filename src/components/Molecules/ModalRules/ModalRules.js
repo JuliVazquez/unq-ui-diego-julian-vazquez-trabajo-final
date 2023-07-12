@@ -41,7 +41,7 @@ const ModalRules = ({ onClose }) => {
         <p>Spock vaporiza a Piedra</p>
         <p>Piedra aplasta a Tijera</p>
         <br></br>
-        <h3>Se juega hasta que el juegador lo decida presionando TERMINAR. En caso de empate, la victoria de la IA.</h3>
+        <h3>Se juega hasta que el jugador lo decida al presionar 'TERMINAR'. En caso de empate, la victoria de la IA.</h3>
       </div>
     </div>
   );
