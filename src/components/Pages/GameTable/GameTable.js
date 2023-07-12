@@ -4,9 +4,9 @@ import CustomButton from "../../Atoms/CustomButton/CutomButton";
 import MoveOptionButton from "../../Atoms/MoveOptionButton/MoveOptionButton";
 import Scoreboard from "../../Atoms/Scoreboard/Scoreboard";
 import images from "../../../assets/images/images";
-import "./Playground.css";
+import "./GameTable.css";
 
-const Playground = () => {
+const GameTable = () => {
   const navigate = useNavigate();
   const [selectedPlayerOption, setSelectedPlayerOption] = useState(images.backing);
   const [selectedIAOption, setSelectedIAOption] = useState(null);
@@ -17,6 +17,7 @@ const Playground = () => {
   const [disableInteraction, setDisableInteraction] = useState(false);
   const [showTerminarButton, setShowTerminarButton] = useState(true);
   const [showError, setShowError] = useState(false);
+  const [iaImage, setIAImage] = useState(images.evilIA);
 
   useEffect(() => {
     setSelectedIAOption(images.backing);
@@ -96,16 +97,19 @@ const Playground = () => {
         return images.backing;
     }
   };
-
+  
   const terminarPartida = () => {
     setShowError(false);
     setShowWinner(true);
     setDisableInteraction(true);
+    if (playerWins > iaWins) {
+      setIAImage(images.sadIA);
+    }
     setTimeout(() => {
       navigate("/");
     }, 3000);
   };
-
+  
   const playerOptionImage = getImageForOption(selectedPlayerOption);
   const iaOptionImage = selectedIAOption ? getImageForOption(selectedIAOption) : images.backing;
 
@@ -201,7 +205,7 @@ const Playground = () => {
     <div className="side-menu-right">
       {selectedIAOption && (
         <div className="option-image-container">
-          <img src={images.evilIA} alt="Nueva Imagen" className="option-image" />
+          <img src={iaImage} alt="IAImage" className="option-image" />
         </div>
       )}
 
@@ -226,4 +230,4 @@ const Playground = () => {
   );
 };
 
-export default Playground;
+export default GameTable;

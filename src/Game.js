@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Launcher from "./components/Pages/Launcher/Launcher";
 import NotFoundPage from "./components/Pages/NotFoundPage/NotFoundPage";
-import Playground from "./components/Pages/Playground/Playground";
+import GameTable from "./components/Pages/GameTable/GameTable";
 import "./Game.css"
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Launcher />} />
-        <Route path="/playground" element={<Playground/>} />
+        <Route path="/playground" element={<GameTable/>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter> 

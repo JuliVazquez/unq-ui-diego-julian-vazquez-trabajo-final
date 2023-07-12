@@ -7,6 +7,7 @@ const backing     = require("./backing-card.jpg");
 const notfound    = require("./notFound.png");
 const loading     = require("./loading.gif");
 const evilIA      =require("./evilIA.jpg");
+const sadIA      =require("./sadIA.jpg");
 
 export default {
   piedraImg,
@@ -18,5 +19,6 @@ export default {
   notfound,
   loading,
   evilIA,
+  sadIA
 };
 
